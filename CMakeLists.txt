@@ -3,7 +3,8 @@ project(boxman)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(boxman main.cpp)
-find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
-target_link_libraries(boxman ${SDL2_LIBRARIES})
+find_package(SDL2 REQUIRED COMPONENTS SDL2)
+find_package(SDL2_image REQUIRED)
+add_executable(boxman main.cpp)
+target_link_libraries(boxman PRIVATE SDL2::SDL2 PRIVATE SDL2_image::SDL2_image)
