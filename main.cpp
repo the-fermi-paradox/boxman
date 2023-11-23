@@ -4,13 +4,10 @@
 static constexpr int SCREEN_WIDTH     = 2560;
 static constexpr int SCREEN_HEIGHT    = 1600;
 
-
 class Texture {
 public:
-    Texture() {
-        texture = nullptr;
-    }
-    Texture(SDL_Renderer *renderer, const char *path) {
+    Texture() : texture(nullptr), renderer(nullptr) {}
+    Texture(SDL_Renderer *renderer, const char *path) : renderer(renderer) {
         texture = IMG_LoadTexture(renderer, path);
         if (texture == nullptr)
             ErrorOut("Failed to load texture");
@@ -19,6 +16,7 @@ public:
         if (texture) SDL_DestroyTexture(texture);
     }
     SDL_Texture *texture;
+    SDL_Renderer *renderer;
 };
 
 int main() {
@@ -40,13 +38,13 @@ int main() {
     }
     SDL_RenderPresent(renderer);
     SDL_Event e;
-    bool quit = false;
+    bool game_running = true;
     /* Main game loop */
-    while (!quit) {
+    while (game_running) {
         while (SDL_PollEvent(&e)) {
             switch (e.type) {
                 case SDL_QUIT:
-                    quit = true;
+                    game_running = false;
                     break;
             }
         }
