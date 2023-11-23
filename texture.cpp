@@ -19,3 +19,8 @@ Texture::Texture(SDL_Renderer *renderer, const char *path) : renderer(renderer) 
 Texture::~Texture() {
     if (texture) SDL_DestroyTexture(texture);
 }
+
+void Texture::Render(int x, int y) {
+    SDL_Rect r = {x, y, width, height};
+    SDL_RenderCopy(renderer, texture, nullptr, &r);
+}
