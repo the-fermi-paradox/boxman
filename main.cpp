@@ -1,62 +1,44 @@
-#include <SDL.h>
-#include <SDL2_image/SDL_image.h>
+#include "window.h"
+#include "errors.h"
 
-#define SCREEN_WIDTH 2560
-#define SCREEN_HEIGHT 1600
+static constexpr int SCREEN_WIDTH     = 2560;
+static constexpr int SCREEN_HEIGHT    = 1600;
+
+
+class Texture {
+public:
+    Texture() {
+        texture = nullptr;
+    }
+    Texture(SDL_Renderer *renderer, const char *path) {
+        texture = IMG_LoadTexture(renderer, path);
+        if (texture == nullptr)
+            ErrorOut("Failed to load texture");
+    }
+    ~Texture() {
+        if (texture) SDL_DestroyTexture(texture);
+    }
+    SDL_Texture *texture;
+};
 
 int main() {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        printf("SDL failed to initialize. SDL Error: %s\n", SDL_GetError());
-        return 1;
+        ErrorOut("Failed to initialize video subsystem");
     }
-    SDL_Window *window = SDL_CreateWindow(
-            "Boxman",
-            SDL_WINDOWPOS_UNDEFINED,
-            SDL_WINDOWPOS_UNDEFINED,
-            SCREEN_WIDTH / 2,
-            SCREEN_HEIGHT / 2,
-            SDL_WINDOW_SHOWN
-    );
-    if (window == NULL) {
-        printf("Window failed to initialize. SDL Error: %s\n", SDL_GetError());
-        return 1;
-    }
-    auto screen_surface = SDL_GetWindowSurface(window);
-    if (screen_surface == NULL) {
-        printf("Surface failed to initialize. SDL Error: %s\n", SDL_GetError());
-        return 1;
-    }
-    if (SDL_FillRect(screen_surface, NULL, SDL_MapRGB(screen_surface->format, 0x80, 0x80, 0x70)) < 0) {
-        printf("Failed to fill rectangle. SDL Error: %s\n", SDL_GetError());
-        return 1;
-    }
-    if (SDL_UpdateWindowSurface(window) < 0) {
-        printf("Failed to update window surface. SDL Error: %s\n", SDL_GetError());
-        return 1;
-    }
+    Window W(1000, 500);
+    SDL_Renderer *renderer = W.GetRenderer();
+    SDL_RenderClear(renderer);
+
     /* Initialize Image subsystem */
     constexpr int img_flags = IMG_INIT_PNG;
     if (!IMG_Init(IMG_INIT_PNG) & img_flags) {
-        printf("SDL2_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
-        return 2;
+        ErrorOut("SDL2_image could not initialize! SDL_image Error: %s\n");
     }
-    SDL_Surface *hero = IMG_Load("/Users/lambda/sokoban/PNG/default/Crates/crate_01.png");
-    if (hero == NULL) {
-        printf("Failed to load hero sprite. SDL Error: %s\n", SDL_GetError());
-        return 1;
-    }
-    printf("%d\n", hero->format->BitsPerPixel);
+    Texture crate1(renderer, "/Users/lambda/sokoban/PNG/default/Crates/crate_01.png");
     for (int i = 0; i < 3; ++i) {
-        SDL_Rect r = {100 * i, 100 * i, 100, 100};
-        if (SDL_BlitScaled(hero, NULL, screen_surface, &r) < 0) {
-            printf("Failed to Blit surface. SDL Error: %s\n", SDL_GetError());
-            return 1;
-        }
+        SDL_RenderCopy(renderer, crate1.texture, NULL, NULL);
     }
-    if (SDL_UpdateWindowSurface(window) < 0) {
-        printf("Failed to update window surface. SDL Error: %s\n", SDL_GetError());
-        return 1;
-    }
+    SDL_RenderPresent(renderer);
     SDL_Event e;
     bool quit = false;
     /* Main game loop */
@@ -69,8 +51,8 @@ int main() {
             }
         }
     }
-    SDL_DestroyWindow(window);
 
     //Quit SDL subsystems
+    IMG_Quit();
     SDL_Quit();
 }
