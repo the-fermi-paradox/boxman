@@ -10,5 +10,7 @@ add_executable(boxman main.cpp
         window.cpp
         window.h
         errors.cpp
-        errors.h)
+        errors.h
+        texture.cpp
+        texture.h)
 target_link_libraries(boxman PRIVATE SDL2::SDL2 PRIVATE SDL2_image::SDL2_image)
