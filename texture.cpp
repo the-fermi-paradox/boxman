@@ -16,15 +16,21 @@ Texture::~Texture() {
     if (texture) SDL_DestroyTexture(texture);
 }
 
-void Texture::Render(int x, int y) {
+void Texture::Render(int x, int y, SDL_Rect *rect) {
     SDL_Rect r = {x, y, width, height};
-    SDL_RenderCopy(renderer, texture, nullptr, &r);
+    if (rect) {
+        r.w = rect->w;
+        r.h = rect->h;
+    }
+    if(SDL_RenderCopy(renderer, texture, rect, &r) < 0) {
+        ErrorOut("Failed to copy texture to back buffer");
+    }
 }
 
-int Texture::GetWidth() {
+int Texture::GetWidth() const {
     return width;
 }
 
-int Texture::GetHeight() {
+int Texture::GetHeight() const {
     return height;
 }
