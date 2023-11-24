@@ -9,7 +9,7 @@ Window::Window(int width, int height) : width(width), height(height) {
                               SDL_WINDOW_SHOWN);
     if (window == nullptr)
         ErrorOut("Failed to create window");
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_PRESENTVSYNC);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(renderer);
 }
