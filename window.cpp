@@ -18,6 +18,10 @@ Window::~Window() {
     if (window) SDL_DestroyWindow(window);
 }
 
+void Window::Present() {
+    SDL_RenderPresent(renderer);
+}
+
 SDL_Renderer *Window::GetRenderer() {
     return renderer;
 }

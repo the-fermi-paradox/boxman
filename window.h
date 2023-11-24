@@ -9,6 +9,7 @@ public:
     Window(int width, int height);
     ~Window();
     SDL_Renderer *GetRenderer();
+    void Present();
 private:
     SDL_Window *window;
     SDL_Renderer *renderer;
