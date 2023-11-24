@@ -1,7 +1,3 @@
-//
-// Created by lambda on 11/23/23.
-//
-
 #include "texture.h"
 
 Texture::Texture() : texture(nullptr), renderer(nullptr), width(0), height(0) {}
@@ -23,4 +19,12 @@ Texture::~Texture() {
 void Texture::Render(int x, int y) {
     SDL_Rect r = {x, y, width, height};
     SDL_RenderCopy(renderer, texture, nullptr, &r);
+}
+
+int Texture::GetWidth() {
+    return width;
+}
+
+int Texture::GetHeight() {
+    return height;
 }
