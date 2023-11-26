@@ -1,17 +1,28 @@
 #include "window.h"
 
-Window::Window(int width, int height) : width(width), height(height) {
+Window::Window(int width, int height, int lWidth, int lHeight)
+: width(width), height(height), lWidth(lWidth), lHeight(lHeight) {
     window = SDL_CreateWindow("Boxman",
                               SDL_WINDOWPOS_UNDEFINED,
                               SDL_WINDOWPOS_UNDEFINED,
                               width,
                               height,
-                              SDL_WINDOW_SHOWN);
+                              SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     if (window == nullptr)
         ErrorOut("Failed to create window");
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderSetLogicalSize(renderer, lWidth, lHeight);
+    //SDL_RenderSetIntegerScale(renderer, SDL_bool::SDL_TRUE);
+    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
     SDL_RenderClear(renderer);
+}
+
+int Window::getLHeight() const {
+    return lHeight;
+}
+
+int Window::getLWidth() const {
+   return lWidth;
 }
 
 Window::~Window() {

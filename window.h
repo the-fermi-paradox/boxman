@@ -6,16 +6,21 @@
 
 class Window {
 public:
-    Window(int width, int height);
+    Window(int width, int height, int lWidth=640, int lHeight=640);
     ~Window();
     SDL_Renderer *GetRenderer();
     void Present();
+
+    int getLWidth() const;
+    int getLHeight() const;
 private:
     SDL_Window *window;
     SDL_Renderer *renderer;
     bool minimized;
     bool mouseFocus;
     bool keyboardFocus;
+    int lWidth;
+    int lHeight;
     int width;
     int height;
 
