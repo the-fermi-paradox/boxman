@@ -9,7 +9,10 @@ public:
     Window(int width, int height, int lWidth=640, int lHeight=640);
     ~Window();
     SDL_Renderer *GetRenderer();
-    void Present();
+    void present();
+    void clear() {
+        SDL_RenderClear(renderer);
+    }
 
     int getLWidth() const;
     int getLHeight() const;

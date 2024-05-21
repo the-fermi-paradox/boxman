@@ -27,9 +27,10 @@ int Window::getLWidth() const {
 
 Window::~Window() {
     if (window) SDL_DestroyWindow(window);
+    if (renderer) SDL_DestroyRenderer(renderer);
 }
 
-void Window::Present() {
+void Window::present() {
     SDL_RenderPresent(renderer);
 }
 
