@@ -50,7 +50,7 @@ Level::Level(const char *path, SpriteSheet &ss) {
 
 void Level::reset() {
     state = start_state;
-    player.setPosition(player_start_x, player_start_y);
+    player.setPosition(player_start_x * TILE_WIDTH, player_start_y * TILE_HEIGHT);
 }
 
 void Level::drawLevel(SpriteSheet &ss) {
