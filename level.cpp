@@ -20,8 +20,8 @@ Level::Level(const char *path, SpriteSheet &ss) {
         ErrorOut("Level's starting y coordinate out of bounds.");
     }
 
-    for (int i = 0; i < level_data.size(); ++i) {
-        for (int j = 0; j < level_data[i].size(); ++j) {
+    for (size_t i = 0; i < level_data.size(); ++i) {
+        for (size_t j = 0; j < level_data[i].size(); ++j) {
             int type = level_data[i][j];
             std::string s = GameObject::getType(type);
             GameObject floor = GameObject("ground_01", j * TILE_WIDTH, i * TILE_HEIGHT,

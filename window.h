@@ -1,6 +1,6 @@
 #ifndef BOXMAN_WINDOW_H
 #define BOXMAN_WINDOW_H
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
 #include "errors.h"
 
@@ -10,9 +10,7 @@ public:
     ~Window();
     SDL_Renderer *GetRenderer();
     void present();
-    void clear() {
-        SDL_RenderClear(renderer);
-    }
+    void clear();
 
     int getLWidth() const;
     int getLHeight() const;

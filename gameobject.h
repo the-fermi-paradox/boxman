@@ -1,8 +1,9 @@
 #ifndef BOXMAN_GAMEOBJECT_H
 #define BOXMAN_GAMEOBJECT_H
 
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <string>
+#include <vector>
 #include "state.h"
 constexpr std::string_view ANIM_LEFT[3] = {"player_15", "player_14", "player_16"};
 constexpr std::string_view ANIM_RIGHT[3] = {"player_12", "player_11", "player_13"};
@@ -20,29 +21,17 @@ public:
     GameObject(std::string type, int x, int y, int w, int h, bool isPlayer=false, bool collidable=true)
     : type(std::move(type)), collider({x, y, w, h}), vx(0), vy(0), isPlayer(isPlayer), collidable(collidable) {}
     void handleEvent(SDL_Event &e);
-    void move(State& state);
+    void move(State &state);
     void setPosition(int x, int y);
     void setAnimation(int i);
-    int getX() const {
-        return collider.x;
-    }
-    int getY() const {
-        return collider.y;
-    }
-    int getTop() const {
-        return collider.y;
-    }
-    int getBottom() const {
-        return collider.y + collider.h;
-    }
-    int getLeft() const {
-        return collider.x;
-    }
-    int getRight() const {
-        return collider.x + collider.w;
-    }
+    int getX() const;
+    int getY() const;
+    int getTop() const;
+    int getBottom() const;
+    int getLeft() const;
+    int getRight() const;
     int getCategory() const;
-    void setSpeed(int x=0, int y=0) ;
+    void setSpeed(int x=0, int y=0);
     std::string getType() const;
     static std::string getType(int n);
 private:

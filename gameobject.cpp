@@ -171,3 +171,22 @@ int GameObject::getCategory() const {
     return 2;
   }
 }
+
+int GameObject::getX() const {
+  return collider.x;
+}
+int GameObject::getY() const {
+  return collider.y;
+}
+int GameObject::getTop() const {
+  return collider.y;
+}
+int GameObject::getBottom() const {
+  return collider.y + collider.h;
+}
+int GameObject::getLeft() const {
+  return collider.x;
+}
+int GameObject::getRight() const {
+  return collider.x + collider.w;
+}

@@ -17,14 +17,11 @@ int main() {
         ErrorOut("SDL2_image could not initialize!");
     }
 
-    Window W(640, 640);
+    Window W(1000, 1000);
     SpriteSheet sprite_sheet(W.GetRenderer(),
                              "/Users/lambda/sokoban/Spritesheet/spritesheet.png",
                              "/Users/lambda/sokoban/Spritesheet/spritesheet.json");
     Level level("/Users/lambda/level.json", sprite_sheet);
-    level.drawLevel(sprite_sheet);
-    W.present();
-
     GameObject &player = level.getPlayer();
 
     /* Main game loop */

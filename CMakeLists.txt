@@ -3,9 +3,9 @@ project(boxman)
 
 set(CMAKE_CXX_STANDARD 23)
 
-include_directories(${SDL2_INCLUDE_DIRS} .)
-find_package(SDL2 REQUIRED COMPONENTS SDL2)
-find_package(SDL2_image REQUIRED)
+find_library(SDLFwk SDL2 REQUIRED)
+find_library(SDLImg SDL2_image)
+include_directories(.)
 add_executable(boxman main.cpp
         window.cpp
         window.h
@@ -20,4 +20,4 @@ add_executable(boxman main.cpp
         spritesheet.cpp
         spritesheet.h
         state.h)
-target_link_libraries(boxman PRIVATE SDL2::SDL2 PRIVATE SDL2_image::SDL2_image)
+target_link_libraries(boxman PRIVATE ${SDLFwk} PRIVATE ${SDLImg})

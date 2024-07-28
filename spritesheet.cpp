@@ -18,3 +18,9 @@ SpriteSheet::SpriteSheet(SDL_Renderer *renderer, const char *img_path, const cha
         sprites[name] = SDL_Rect{element["x"], element["y"], element["width"], element["height"]};
     }
 }
+int SpriteSheet::GetSpriteHeight(const std::string& name) {
+  return sprites[name].h;
+}
+int SpriteSheet::GetSpriteWidth(const std::string& name) {
+  return sprites[name].w;
+}

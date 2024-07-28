@@ -37,3 +37,6 @@ void Window::present() {
 SDL_Renderer *Window::GetRenderer() {
     return renderer;
 }
+void Window::clear(){
+  SDL_RenderClear(renderer);
+}
