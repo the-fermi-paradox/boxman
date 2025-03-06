@@ -8,9 +8,9 @@ class Window {
 public:
     Window(int width, int height, int lWidth=640, int lHeight=640);
     ~Window();
-    SDL_Renderer *GetRenderer();
-    void present();
-    void clear();
+    SDL_Renderer *GetRenderer() const;
+    void present() const;
+    void clear() const;
 
     int getLWidth() const;
     int getLHeight() const;

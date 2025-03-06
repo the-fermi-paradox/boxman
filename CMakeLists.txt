@@ -21,3 +21,17 @@ add_executable(boxman main.cpp
         spritesheet.h
         state.h)
 target_link_libraries(boxman PRIVATE ${SDLFwk} PRIVATE ${SDLImg})
+
+# Copy the images folder
+add_custom_command(TARGET boxman POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/sokoban ${CMAKE_BINARY_DIR}/sokoban
+        COMMENT "Copying sokoban assets..."
+)
+
+# Copy level.json
+add_custom_command(TARGET boxman POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_SOURCE_DIR}/level.json ${CMAKE_BINARY_DIR}/level.json
+        COMMENT "Copying level.json..."
+)

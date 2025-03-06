@@ -5,10 +5,13 @@
 #include <string>
 #include <vector>
 #include "state.h"
-constexpr std::string_view ANIM_LEFT[3] = {"player_15", "player_14", "player_16"};
-constexpr std::string_view ANIM_RIGHT[3] = {"player_12", "player_11", "player_13"};
+constexpr std::string_view ANIM_LEFT[3] = {"player_15", "player_14",
+                                           "player_16"};
+constexpr std::string_view ANIM_RIGHT[3] = {"player_12", "player_11",
+                                            "player_13"};
 constexpr std::string_view ANIM_UP[3] = {"player_03", "player_02", "player_04"};
-constexpr std::string_view ANIM_DOWN[3] = {"player_01", "player_23", "player_24"};
+constexpr std::string_view ANIM_DOWN[3] = {"player_01", "player_23",
+                                           "player_24"};
 
 
 class GameObject {
@@ -18,32 +21,38 @@ public:
     bool collidable = true;
     static constexpr int speed = 2;
     GameObject() = default;
-    GameObject(std::string type, int x, int y, int w, int h, bool isPlayer=false, bool collidable=true)
-    : type(std::move(type)), collider({x, y, w, h}), vx(0), vy(0), isPlayer(isPlayer), collidable(collidable) {}
+    GameObject(std::string type, const int x, const int y, const int w,
+               const int h, const bool isPlayer = false,
+               const bool collidable = true) :
+        collidable(collidable), vx(0), vy(0), type(std::move(type)),
+        isPlayer(isPlayer), collider({x, y, w, h})
+    {
+    }
     void handleEvent(SDL_Event &e);
     void move(State &state);
     void setPosition(int x, int y);
     void setAnimation(int i);
-    int getX() const;
-    int getY() const;
-    int getTop() const;
-    int getBottom() const;
-    int getLeft() const;
-    int getRight() const;
-    int getCategory() const;
-    void setSpeed(int x=0, int y=0);
-    std::string getType() const;
+    [[nodiscard]] int getX() const;
+    [[nodiscard]] int getY() const;
+    [[nodiscard]] int getTop() const;
+    [[nodiscard]] int getBottom() const;
+    [[nodiscard]] int getLeft() const;
+    [[nodiscard]] int getRight() const;
+    [[nodiscard]] int getCategory() const;
+    [[nodiscard]] std::string getType() const;
+    void setSpeed(int x = 0, int y = 0);
     static std::string getType(int n);
-private:
-    int vx;
-    int vy;
-    std::string type;
-    bool isPlayer;
-    SDL_Rect collider;
 
-    bool checkCollision(const GameObject &B);
-    bool checkCollision(State &state);
+private:
+    int vx{};
+    int vy{};
+    std::string type;
+    bool isPlayer{};
+    SDL_Rect collider{};
+
+    bool checkCollision(const GameObject &B) const;
+    bool checkCollision(State &state) const;
 };
 
 
-#endif //BOXMAN_GAMEOBJECT_H
+#endif // BOXMAN_GAMEOBJECT_H

@@ -1,19 +1,21 @@
 #ifndef BOXMAN_LEVEL_H
 #define BOXMAN_LEVEL_H
-#include <nlohmann/json.hpp>
 #include <fstream>
-#include <spritesheet.h>
 #include <gameobject.h>
+#include <nlohmann/json.hpp>
+#include <spritesheet.h>
 #include "state.h"
 using json = nlohmann::json;
 
 class Level {
 public:
-    explicit Level(const char *path, SpriteSheet &ss);
-    void drawLevel(SpriteSheet &ss);
+    Level(const std::filesystem::path &path, const SpriteSheet &ss);
+    explicit Level(const char *path, const SpriteSheet &ss);
+    void drawLevel(SpriteSheet &ss) const;
     void reset();
     GameObject &getPlayer();
     State state;
+
 private:
     State start_state;
     GameObject player;
@@ -23,4 +25,4 @@ private:
     int height;
 };
 
-#endif //BOXMAN_LEVEL_H
+#endif // BOXMAN_LEVEL_H

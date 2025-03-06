@@ -1,8 +1,12 @@
 #include "texture.h"
 
-Texture::Texture() : texture(nullptr), renderer(nullptr), width(0), height(0) {}
-Texture::Texture(SDL_Renderer *renderer, const char *path) : renderer(renderer) {
-    texture = IMG_LoadTexture(renderer, path);
+#include <__filesystem/path.h>
+
+Texture::Texture() : width(0), height(0), renderer(nullptr), texture(nullptr) {}
+Texture::Texture(SDL_Renderer *renderer, const std::filesystem::path &path) :
+    renderer(renderer)
+{
+    texture = IMG_LoadTexture(renderer, path.c_str());
     if (texture == nullptr)
         ErrorOut("Failed to load texture");
     if (SDL_QueryTexture(texture, nullptr, nullptr, &width, &height)) {
@@ -12,25 +16,24 @@ Texture::Texture(SDL_Renderer *renderer, const char *path) : renderer(renderer) 
     }
 }
 
-Texture::~Texture() {
-    if (texture) SDL_DestroyTexture(texture);
+Texture::~Texture()
+{
+    if (texture)
+        SDL_DestroyTexture(texture);
 }
 
-void Texture::Render(int x, int y, SDL_Rect *rect) {
+void Texture::Render(const int x, const int y, const SDL_Rect *rect) const
+{
     SDL_Rect r = {x, y, width, height};
     if (rect) {
         r.w = rect->w;
         r.h = rect->h;
     }
-    if(SDL_RenderCopy(renderer, texture, rect, &r) < 0) {
+    if (SDL_RenderCopy(renderer, texture, rect, &r) < 0) {
         ErrorOut("Failed to copy texture to back buffer");
     }
 }
 
-int Texture::GetWidth() const {
-    return width;
-}
+int Texture::GetWidth() const { return width; }
 
-int Texture::GetHeight() const {
-    return height;
-}
+int Texture::GetHeight() const { return height; }
