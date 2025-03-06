@@ -1,10 +1,13 @@
 #include "window.h"
 
-Window::Window(int width, int height, int lWidth, int lHeight) :
-    width(width), height(height), lWidth(lWidth), lHeight(lHeight) {
+Window::Window(const int width, const int height, const int lWidth,
+               const int lHeight) :
+    lWidth(lWidth), lHeight(lHeight), width(width), height(height)
+{
     window = SDL_CreateWindow("Boxman", SDL_WINDOWPOS_UNDEFINED,
                               SDL_WINDOWPOS_UNDEFINED, width, height,
-                              SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+                              SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE |
+                                      SDL_WINDOW_ALLOW_HIGHDPI);
     if (window == nullptr)
         ErrorOut("Failed to create window");
     renderer = SDL_CreateRenderer(
@@ -18,7 +21,8 @@ int Window::getLHeight() const { return lHeight; }
 
 int Window::getLWidth() const { return lWidth; }
 
-Window::~Window() {
+Window::~Window()
+{
     if (window)
         SDL_DestroyWindow(window);
     if (renderer)
