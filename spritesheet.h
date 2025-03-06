@@ -16,6 +16,7 @@ public:
                 const std::filesystem::path &json_path);
     SpriteSheet(SDL_Renderer *renderer, const char *img_path,
                 const char *json_path);
+    void Refresh();
     void RenderSprite(int x, int y, const std::string &name);
     int GetSpriteWidth(const std::string &name) const;
     int GetSpriteHeight(const std::string &name) const;

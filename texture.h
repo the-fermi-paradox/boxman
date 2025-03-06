@@ -10,12 +10,14 @@ public:
     Texture(SDL_Renderer *renderer, const std::filesystem::path &path);
     ~Texture();
     void Render(int x, int y, const SDL_Rect *rect = nullptr) const;
+    void Refresh();
     int GetWidth() const;
     int GetHeight() const;
 
 private:
     int width;
     int height;
+    const std::filesystem::path path;
     SDL_Renderer *renderer;
     SDL_Texture *texture;
 };

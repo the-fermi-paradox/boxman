@@ -29,6 +29,7 @@ SpriteSheet::SpriteSheet(SDL_Renderer *renderer, const char *img_path,
                 std::filesystem::absolute(json_path))
 {
 }
+void SpriteSheet::Refresh() { sheet_texture.Refresh(); }
 int SpriteSheet::GetSpriteHeight(const std::string &name) const
 {
     return sprites.at(name).h;
