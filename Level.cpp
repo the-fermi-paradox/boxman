@@ -1,10 +1,13 @@
 #include "Level.h"
-
+#include <nlohmann/json.hpp>
+#include <fstream>
+#include "errors.h"
 #include "GameObjects/Crate.h"
 #include "GameObjects/Player.h"
 constexpr int TILE_HEIGHT = 64;
 constexpr int TILE_WIDTH = 64;
 
+using json = nlohmann::json;
 Player &Level::getPlayer() { return player; }
 Level::Level(const std::filesystem::path &path, const SpriteSheet &ss)
 {

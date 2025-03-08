@@ -15,8 +15,8 @@ public:
 private:
     int width{};
     int height{};
-    const std::filesystem::path path;
-    SDL_Renderer *renderer;
+    const std::filesystem::path path{};
+    SDL_Renderer *renderer{};
     SDL_Texture *texture{};
 };
 #endif // BOXMAN_TEXTURE_H

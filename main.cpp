@@ -3,7 +3,6 @@
 #include "Spritesheet.h"
 #include "Window.h"
 #include "errors.h"
-using json = nlohmann::json;
 constexpr int TILE_WIDTH = 64;
 constexpr int TILE_HEIGHT = 64;
 

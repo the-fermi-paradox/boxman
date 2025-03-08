@@ -9,7 +9,8 @@
 class Crate;
 class Moveable;
 
-struct State {
+class State {
+public:
     std::vector<GameObject> floors;
     std::vector<Obstacle> statics;
     std::vector<Crate> dynamics;

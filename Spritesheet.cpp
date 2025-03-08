@@ -1,5 +1,8 @@
 #include "Spritesheet.h"
-
+#include <errors.h>
+#include <fstream>
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 void SpriteSheet::RenderSprite(const int x, const int y,
                                const std::string &name)
 {
@@ -16,7 +19,7 @@ SpriteSheet::SpriteSheet(SDL_Renderer *renderer,
                          const std::filesystem::path &json_path) :
     sheet_texture(Texture(renderer, img_path))
 {
-    std::ifstream f(std::filesystem::absolute(json_path));
+    std::ifstream f(absolute(json_path));
     for (json data = json::parse(f)["SubTexture"]; const auto &element: data) {
         std::string name = element["name"];
         sprites[name] = SDL_Rect{element["x"], element["y"], element["width"],

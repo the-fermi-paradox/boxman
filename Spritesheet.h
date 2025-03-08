@@ -1,12 +1,9 @@
 #ifndef BOXMAN_SPRITESHEET_H
 #define BOXMAN_SPRITESHEET_H
 
+#include <unordered_map>
 #include <SDL2/SDL.h>
-#include <errors.h>
-#include <fstream>
-#include <nlohmann/json.hpp>
 #include "Texture.h"
-using json = nlohmann::json;
 
 class SpriteSheet {
 public:

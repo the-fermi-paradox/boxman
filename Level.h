@@ -1,14 +1,7 @@
 #ifndef BOXMAN_LEVEL_H
 #define BOXMAN_LEVEL_H
-#include <Spritesheet.h>
-#include <fstream>
-#include <nlohmann/json.hpp>
-#include "GameObjects/GameObject.h"
-#include "GameObjects/Obstacle.h"
-
 #include "GameObjects/Player.h"
 #include "State.h"
-using json = nlohmann::json;
 
 class Level {
 public:
