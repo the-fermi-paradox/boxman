@@ -7,7 +7,7 @@
 class Texture {
 public:
     Texture();
-    Texture(SDL_Renderer *renderer, const std::filesystem::path &path);
+    Texture(SDL_Renderer *renderer, std::filesystem::path path);
     ~Texture();
     void Render(int x, int y, const SDL_Rect *rect = nullptr) const;
     void Refresh();
@@ -15,10 +15,10 @@ public:
     int GetHeight() const;
 
 private:
-    int width;
-    int height;
+    int width{};
+    int height{};
     const std::filesystem::path path;
     SDL_Renderer *renderer;
-    SDL_Texture *texture;
+    SDL_Texture *texture{};
 };
 #endif // BOXMAN_TEXTURE_H

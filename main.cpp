@@ -1,10 +1,8 @@
-#include <__format/format_functions.h>
-#include <level.h>
-
+#include "GameObjects/Player.h"
+#include "Level.h"
+#include "Spritesheet.h"
+#include "Window.h"
 #include "errors.h"
-#include "spritesheet.h"
-#include "texture.h"
-#include "window.h"
 using json = nlohmann::json;
 constexpr int TILE_WIDTH = 64;
 constexpr int TILE_HEIGHT = 64;
@@ -14,7 +12,6 @@ int main()
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         ErrorOut("Failed to initialize video subsystem");
     }
-
     constexpr int img_flags = IMG_INIT_PNG;
     if ((!IMG_Init(IMG_INIT_PNG)) & img_flags) {
         ErrorOut("SDL2_image could not initialize!");
@@ -25,7 +22,7 @@ int main()
                              "sokoban/Spritesheet/spritesheet.png",
                              "sokoban/Spritesheet/spritesheet.json");
     Level level("level.json", sprite_sheet);
-    GameObject &player = level.getPlayer();
+    Player &player = level.getPlayer();
 
     /* Main game loop */
     bool game_running = true;
@@ -41,7 +38,9 @@ int main()
                     switch (e.key.keysym.sym) {
                         case SDLK_RETURN:
                             level.reset();
+                            break;
                     }
+                    break;
             }
             player.handleEvent(e);
         }
@@ -50,14 +49,12 @@ int main()
         W.clear();
         level.drawLevel(sprite_sheet);
         W.present();
-        SDL_WINDOWPOS_UNDEFINED;
-        auto curr = SDL_GetTicks64();
+        const auto curr = SDL_GetTicks64();
         while (curr - SDL_GetTicks64() < 1000 / 60) {
         }
         ++frames;
     }
 
-    // Quit SDL subsystems
     IMG_Quit();
     SDL_Quit();
 }

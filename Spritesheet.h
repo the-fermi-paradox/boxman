@@ -5,7 +5,7 @@
 #include <errors.h>
 #include <fstream>
 #include <nlohmann/json.hpp>
-#include <texture.h>
+#include "Texture.h"
 using json = nlohmann::json;
 
 /* Sprite sheets are instantiated by passing in a Spritesheet alongside a map
@@ -18,8 +18,8 @@ public:
                 const char *json_path);
     void Refresh();
     void RenderSprite(int x, int y, const std::string &name);
-    int GetSpriteWidth(const std::string &name) const;
-    int GetSpriteHeight(const std::string &name) const;
+    [[nodiscard]] int GetSpriteWidth(const std::string &name) const;
+    [[nodiscard]] int GetSpriteHeight(const std::string &name) const;
 
 private:
     std::unordered_map<std::string, SDL_Rect> sprites;

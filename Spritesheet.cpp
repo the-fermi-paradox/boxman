@@ -1,4 +1,4 @@
-#include "spritesheet.h"
+#include "Spritesheet.h"
 
 void SpriteSheet::RenderSprite(const int x, const int y,
                                const std::string &name)

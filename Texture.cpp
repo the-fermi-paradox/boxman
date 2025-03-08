@@ -1,10 +1,12 @@
-#include "texture.h"
+#include "Texture.h"
 
 #include <__filesystem/path.h>
 
+#include <utility>
+
 Texture::Texture() : width(0), height(0), renderer(nullptr), texture(nullptr) {}
-Texture::Texture(SDL_Renderer *renderer, const std::filesystem::path &path) :
-    renderer(renderer), path(path)
+Texture::Texture(SDL_Renderer *renderer, std::filesystem::path path) :
+    renderer(renderer), path(std::move(path))
 {
     this->Refresh();
 }
