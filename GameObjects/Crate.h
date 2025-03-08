@@ -5,7 +5,7 @@
 class State;
 class Crate : public Moveable {
 public:
-    using Moveable::Moveable;
+    using Moveable::Moveable, Moveable::checkCollision;
     bool checkCollision(State &state) const override;
 
 protected:

@@ -7,5 +7,10 @@ bool Crate::checkCollision(State &state) const
             target.setFilled(true);
         }
     }
+    for (auto &object: state.dynamics) {
+        if (this != &object && this->checkCollision(object)) {
+            return true;
+        }
+    }
     return Moveable::checkCollision(state);
 }
