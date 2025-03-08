@@ -50,8 +50,7 @@ int main()
             W.clear();
             level.drawLevel(sprite_sheet);
             if (level.checkWin()) {
-                SDL_Rect R = {0, 0, 500, 500};
-                WinScreen.Render(0, 0, &R);
+                WinScreen.Render(nullptr, nullptr);
             }
             W.present();
         }

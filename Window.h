@@ -14,6 +14,8 @@ public:
 
     int getLWidth() const;
     int getLHeight() const;
+    int getWidth() const;
+    int getHeight() const;
 private:
     SDL_Window *window;
     SDL_Renderer *renderer;

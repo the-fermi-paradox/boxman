@@ -11,7 +11,9 @@ void SpriteSheet::RenderSprite(const int x, const int y,
             ErrorOut("Sprite name not present in map");
         }
     }
-    sheet_texture.Render(x, y, &sprites[name]);
+    const SDL_Rect source = sprites[name];
+    const SDL_Rect dest = {x, y, source.w, source.h};
+    sheet_texture.Render(&source, &dest);
 }
 
 SpriteSheet::SpriteSheet(SDL_Renderer *renderer,

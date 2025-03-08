@@ -17,14 +17,9 @@ Texture::~Texture()
     texture = nullptr;
 }
 
-void Texture::Render(const int x, const int y, const SDL_Rect *rect) const
+void Texture::Render(const SDL_Rect *sourceRect, const SDL_Rect *destRect) const
 {
-    SDL_Rect r = {x, y, width, height};
-    if (rect) {
-        r.w = rect->w;
-        r.h = rect->h;
-    }
-    if (SDL_RenderCopy(renderer, texture, rect, &r) < 0) {
+    if (SDL_RenderCopy(renderer, texture, sourceRect, destRect) < 0) {
         ErrorOut("Failed to copy texture to back buffer");
     }
 }

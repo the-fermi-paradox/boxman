@@ -7,7 +7,8 @@ public:
     Texture();
     Texture(SDL_Renderer *renderer, std::filesystem::path path);
     ~Texture();
-    void Render(int x, int y, const SDL_Rect *rect = nullptr) const;
+    void Render(const SDL_Rect *sourceRect,
+                const SDL_Rect *destRect) const;
     void Refresh();
     int GetWidth() const;
     int GetHeight() const;

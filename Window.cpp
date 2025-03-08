@@ -18,6 +18,24 @@ Window::Window(const int width, const int height, const int lWidth,
 }
 
 int Window::getLHeight() const { return lHeight; }
+int Window::getWidth() const
+{
+    int x = 0;
+    int y = 0;
+    if (SDL_GetRendererOutputSize(renderer, &x, &y) < 0) {
+       ErrorOut("Failed to get renderer output size");
+    }
+    return x;
+}
+int Window::getHeight() const
+{
+    int x = 0;
+    int y = 0;
+    if (SDL_GetRendererOutputSize(renderer, &x, &y) < 0) {
+       ErrorOut("Failed to get renderer output size");
+    }
+    return y;
+}
 
 int Window::getLWidth() const { return lWidth; }
 
