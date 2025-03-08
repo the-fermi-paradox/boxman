@@ -16,18 +16,12 @@ SpriteSheet::SpriteSheet(SDL_Renderer *renderer,
                          const std::filesystem::path &json_path) :
     sheet_texture(Texture(renderer, img_path))
 {
-    std::ifstream f(json_path);
+    std::ifstream f(std::filesystem::absolute(json_path));
     for (json data = json::parse(f)["SubTexture"]; const auto &element: data) {
         std::string name = element["name"];
         sprites[name] = SDL_Rect{element["x"], element["y"], element["width"],
                                  element["height"]};
     }
-}
-SpriteSheet::SpriteSheet(SDL_Renderer *renderer, const char *img_path,
-                         const char *json_path) :
-    SpriteSheet(renderer, std::filesystem::absolute(img_path),
-                std::filesystem::absolute(json_path))
-{
 }
 void SpriteSheet::Refresh() { sheet_texture.Refresh(); }
 int SpriteSheet::GetSpriteHeight(const std::string &name) const

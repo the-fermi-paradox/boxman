@@ -8,8 +8,9 @@
 class GameObject {
 public:
     GameObject() = default;
-    GameObject(std::string type, std::string sprite, int x, int y,
-               int w, int h);
+    GameObject(std::string type, std::string sprite, int x, int y, int w,
+               int h);
+    bool samePosition(GameObject &o) const;
     [[nodiscard]] int getX() const;
     [[nodiscard]] int getY() const;
     [[nodiscard]] int getTop() const;

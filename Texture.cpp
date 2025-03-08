@@ -1,12 +1,12 @@
 #include "Texture.h"
-
+#include <SDL2_image/SDL_image.h>
 #include <__filesystem/path.h>
-
-#include <utility>
+#include <filesystem>
+#include "errors.h"
 
 Texture::Texture() : width(0), height(0), renderer(nullptr), texture(nullptr) {}
 Texture::Texture(SDL_Renderer *renderer, std::filesystem::path path) :
-    renderer(renderer), path(std::move(path))
+    renderer(renderer), path(std::filesystem::absolute(path))
 {
     this->Refresh();
 }

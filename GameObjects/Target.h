@@ -6,6 +6,7 @@ class Target : public GameObject {
 public:
     using GameObject::GameObject;
     void setFilled(bool value);
+    [[nodiscard]] bool getFilled() const;
 
 protected:
     bool filled = false;

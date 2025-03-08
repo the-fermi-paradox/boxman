@@ -14,10 +14,12 @@ class Level {
 public:
     Level(const std::filesystem::path &path, const SpriteSheet &ss);
     explicit Level(const char *path, const SpriteSheet &ss);
+    bool checkWin();
     void drawLevel(SpriteSheet &ss) const;
     void reset();
     Player &getPlayer();
     State state;
+    bool win = false;
 
 private:
     State start_state;

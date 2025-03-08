@@ -9,6 +9,10 @@ int GameObject::getLeft() const { return collider.x; }
 int GameObject::getRight() const { return collider.x + collider.w; }
 GameObject::GameObject(std::string type, std::string sprite, const int x,
                        const int y, const int w, const int h) :
-        type(std::move(type)), sprite(std::move(sprite)), collider({x, y, w, h})
+    type(std::move(type)), sprite(std::move(sprite)), collider({x, y, w, h})
 {
+}
+bool GameObject::samePosition(GameObject &o) const
+{
+    return (o.getX() == this->getX() && o.getY() == this->getY());
 }

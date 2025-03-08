@@ -23,6 +23,7 @@ int main()
                              "sokoban/Spritesheet/spritesheet.json");
     Level level("level.json", sprite_sheet);
     Player &player = level.getPlayer();
+    const auto WinScreen = Texture(W.GetRenderer(), "sokoban/good_ending.png");
 
     /* Main game loop */
     bool game_running = true;
@@ -44,11 +45,17 @@ int main()
             }
             player.handleEvent(e);
         }
-        player.move(level.state);
-        player.setAnimation(frames);
-        W.clear();
-        level.drawLevel(sprite_sheet);
-        W.present();
+        if (!level.win) {
+            player.move(level.state);
+            player.setAnimation(frames);
+            W.clear();
+            level.drawLevel(sprite_sheet);
+            if (level.checkWin()) {
+                SDL_Rect R = {0, 0, 500, 500};
+                WinScreen.Render(0, 0, &R);
+            }
+            W.present();
+        }
         const auto curr = SDL_GetTicks64();
         while (curr - SDL_GetTicks64() < 1000 / 60) {
         }

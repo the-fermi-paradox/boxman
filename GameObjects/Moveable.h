@@ -1,8 +1,8 @@
 #ifndef MOVEABLE_H
 #define MOVEABLE_H
 #include "GameObjects/GameObject.h"
-#include "State.h"
 
+class State;
 class Moveable : public GameObject {
 public:
     using GameObject::GameObject;

@@ -1,4 +1,5 @@
 #include "Moveable.h"
+#include "State.h"
 void Moveable::move(State &state)
 {
     collider.x += vx;

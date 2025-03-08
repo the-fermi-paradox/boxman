@@ -1,9 +1,7 @@
 #ifndef BOXMAN_TEXTURE_H
 #define BOXMAN_TEXTURE_H
 #include <SDL2/SDL.h>
-#include <SDL2_image/SDL_image.h>
 #include <__filesystem/path.h>
-#include "errors.h"
 class Texture {
 public:
     Texture();

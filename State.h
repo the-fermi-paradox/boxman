@@ -2,15 +2,17 @@
 #define BOXMAN_STATE_H
 #include "GameObjects/GameObject.h"
 #include "GameObjects/Moveable.h"
+#include "GameObjects/Crate.h"
 #include "GameObjects/Obstacle.h"
 #include "GameObjects/Target.h"
 
+class Crate;
 class Moveable;
 
 struct State {
     std::vector<GameObject> floors;
     std::vector<Obstacle> statics;
-    std::vector<Moveable> dynamics;
+    std::vector<Crate> dynamics;
     std::vector<Target> targets;
 };
 

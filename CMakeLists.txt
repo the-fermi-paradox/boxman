@@ -23,8 +23,8 @@ add_executable(
         Spritesheet.cpp
         Spritesheet.h
         State.h
-        Crate.cpp
-        Crate.h
+        GameObjects/Crate.cpp
+        GameObjects/Crate.h
         GameObjects/Player.cpp
         GameObjects/Player.h
         GameObjects/Obstacle.cpp

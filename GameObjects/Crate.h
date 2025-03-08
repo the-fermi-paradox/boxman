@@ -2,15 +2,11 @@
 #define CRATE_H
 #include "GameObjects/Moveable.h"
 
+class State;
 class Crate : public Moveable {
 public:
     using Moveable::Moveable;
-
-public:
-    [[nodiscard]] bool checkCollision(const GameObject &object) const
-    {
-        return Moveable::checkCollision(object);
-    }
+    bool checkCollision(State &state) const override;
 
 protected:
 };

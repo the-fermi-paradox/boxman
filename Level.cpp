@@ -1,4 +1,6 @@
 #include "Level.h"
+
+#include "GameObjects/Crate.h"
 #include "GameObjects/Player.h"
 constexpr int TILE_HEIGHT = 64;
 constexpr int TILE_WIDTH = 64;
@@ -30,17 +32,17 @@ Level::Level(const std::filesystem::path &path, const SpriteSheet &ss)
                                i * TILE_HEIGHT, ss.GetSpriteWidth("ground_01"),
                                ss.GetSpriteHeight("ground_01"));
             state.floors.push_back(floor);
-            auto addEntity = [&](auto &container) -> void {
-                container.emplace_back(
+            auto addEntity = [&]<typename T>(auto &container) -> void {
+                container.push_back(T(
                         type, sprite, j * TILE_WIDTH, i * TILE_HEIGHT,
-                        ss.GetSpriteWidth(sprite), ss.GetSpriteHeight(sprite));
+                        ss.GetSpriteWidth(sprite), ss.GetSpriteHeight(sprite)));
             };
             if (type == "block") {
-                addEntity(state.statics);
+                addEntity.operator()<Obstacle>(state.statics);
             } else if (type == "target") {
-                addEntity(state.targets);
+                addEntity.operator()<Target>(state.targets);
             } else if (type == "crate") {
-                addEntity(state.dynamics);
+                addEntity.operator()<Crate>(state.dynamics);
             }
         }
     }
@@ -59,6 +61,7 @@ Level::Level(const char *path, const SpriteSheet &ss) :
 void Level::reset()
 {
     state = start_state;
+    win = false;
     player.setPosition(player_start_x * TILE_WIDTH,
                        player_start_y * TILE_HEIGHT);
 }
@@ -78,4 +81,12 @@ void Level::drawLevel(SpriteSheet &ss) const
     renderContainer(state.statics);
     renderContainer(state.dynamics);
     render(player);
+}
+bool Level::checkWin()
+{
+    for (const auto &target: state.targets) {
+        if (!target.getFilled())
+            return false;
+    }
+    return win = true;
 }

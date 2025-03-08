@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "State.h"
 void Player::setAnimation(const int i)
 {
     if (!vx && !vy) {
