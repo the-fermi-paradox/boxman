@@ -13,7 +13,7 @@ public:
 protected:
     uint64_t frames{};
     std::string sprite_name;
-    bool checkCollision(State &state) const override;
+    bool checkCollision(State &state) override;
     static constexpr std::string_view ANIM_LEFT[3] = {"player_15", "player_14",
                                                       "player_16"};
     static constexpr std::string_view ANIM_RIGHT[3] = {"player_12", "player_11",

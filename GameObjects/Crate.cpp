@@ -1,10 +1,12 @@
 #include "Crate.h"
 #include "State.h"
-bool Crate::checkCollision(State &state) const
+bool Crate::checkCollision(State &state)
 {
     for (auto &target: state.targets) {
         if (this->samePosition(target)) {
             target.setFilled(true);
+            locked = true;
+            break;
         }
     }
     for (auto &object: state.dynamics) {

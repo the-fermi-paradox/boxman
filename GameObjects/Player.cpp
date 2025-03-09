@@ -73,12 +73,14 @@ void Player::handleEvent(const SDL_Event &e)
         }
     }
 }
-bool Player::checkCollision(State &state) const
+bool Player::checkCollision(State &state)
 {
     for (auto &object: state.dynamics) {
         if (this->checkCollision(object)) {
-            object.setSpeed(this->vx, this->vy);
-            object.move(state);
+            if (!object.locked) {
+                object.setSpeed(this->vx, this->vy);
+                object.move(state);
+            }
             return true;
         }
     }

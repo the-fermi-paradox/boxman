@@ -52,7 +52,7 @@ bool Moveable::checkCollision(const GameObject &B) const
     return true;
 }
 
-bool Moveable::checkCollision(State &state) const
+bool Moveable::checkCollision(State &state)
 {
     return std::ranges::any_of(state.statics, [&](const auto &el) {
         return this->checkCollision(el);

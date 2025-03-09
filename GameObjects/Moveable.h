@@ -14,7 +14,7 @@ protected:
     int vx{};
     int vy{};
     [[nodiscard]] bool checkCollision(const GameObject &B) const;
-    virtual bool checkCollision(State &state) const;
+    virtual bool checkCollision(State &state);
 };
 
 #endif // MOVEABLE_H
