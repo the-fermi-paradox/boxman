@@ -6,6 +6,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined")
 
 find_library(SDLFwk SDL2 REQUIRED)
 find_library(SDLImg SDL2_image)
+find_library(SDLMixer SDL2_mixer)
 include_directories(.)
 add_executable(
         boxman
@@ -38,7 +39,7 @@ add_executable(
         Renderer.cpp
         Renderer.h
 )
-target_link_libraries(boxman PRIVATE ${SDLFwk} PRIVATE ${SDLImg})
+target_link_libraries(boxman PRIVATE ${SDLFwk} PRIVATE ${SDLImg} PRIVATE ${SDLMixer})
 
 # Function to collect all files in a directory (CMake 3.12+ required)
 function(collect_files DIR OUT_VAR)

@@ -1,3 +1,7 @@
+#include <SDL2/SDL.h>
+#include <SDL2_mixer/SDL_mixer.h>
+#include <__filesystem/operations.h>
+
 #include "Errors.h"
 #include "Game.h"
 #include "GameObjects/Player.h"
@@ -12,9 +16,26 @@ int main()
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         ErrorOut("Failed to initialize video subsystem");
     }
-    constexpr int img_flags = IMG_INIT_PNG;
-    if ((!IMG_Init(IMG_INIT_PNG)) & img_flags) {
+    if (!IMG_Init(IMG_INIT_PNG)) {
         ErrorOut("SDL2_image could not initialize!");
+    }
+
+    if (constexpr uint64_t audio_flags = MIX_INIT_MP3;
+        (Mix_Init(audio_flags) & audio_flags) != audio_flags) {
+        ErrorOut("SDL2_mixer could not initialize!");
+    }
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        ErrorOut("SDL2_mixer could not open audio!");
+        return -1;
+    }
+
+    // Load and play a sample MP3 file (example)
+    Mix_Music *music =
+            Mix_LoadMUS(std::filesystem::absolute("puzzle.mp3").c_str());
+    if (!music) {
+        ErrorOut("Failed to load music!");
+    } else {
+        Mix_PlayMusic(music, -1); // Loop indefinitely
     }
 
     const Window W(1000, 1000);
@@ -66,7 +87,8 @@ int main()
         while (curr - SDL_GetTicks64() < 1000 / 60)
             ;
     }
-
+    Mix_FreeMusic(music);
+    Mix_Quit();
     IMG_Quit();
     SDL_Quit();
 }
