@@ -8,7 +8,7 @@ public:
     virtual ~GameObject() = default;
     GameObject() = default;
     GameObject(SDL_Rect sprite, int x, int y);
-    bool samePosition(GameObject &o) const;
+    bool samePosition(const GameObject &o) const;
     [[nodiscard]] int getX() const;
     [[nodiscard]] int getY() const;
     [[nodiscard]] int getTop() const;

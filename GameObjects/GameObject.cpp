@@ -11,7 +11,7 @@ GameObject::GameObject(const SDL_Rect sprite, const int x, const int y) :
     sprite(sprite), collider({x, y, sprite.w, sprite.h})
 {
 }
-bool GameObject::samePosition(GameObject &o) const
+bool GameObject::samePosition(const GameObject &o) const
 {
     return o.getX() == this->getX() && o.getY() == this->getY();
 }
