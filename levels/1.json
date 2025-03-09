@@ -1,0 +1,66 @@
+{
+  "map": [
+    [ {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "block_03", "type": "block"}],
+    [
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "block_03", "type": "block"}
+    ],
+    [
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "crate_01", "type": "crate"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "block_03", "type": "block"}
+    ],
+    [
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "environment_01", "type": "target"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "ground_01", "type": "floor"},
+      {"sprite": "block_03", "type": "block"}
+    ],
+    [
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"},
+      {"sprite": "block_03", "type": "block"}
+    ]
+  ],
+  "player_start": {
+    "x": 6,
+    "y": 1
+  }
+}
