@@ -5,12 +5,14 @@
 
 class Player : public Moveable {
 public:
-    Player() = default;
     using Moveable::Moveable, Moveable::checkCollision;
     void handleEvent(const SDL_Event &e);
-    void setAnimation(int i);
+    void setAnimation(const SpriteSheet &sprite_sheet);
+    void nextFrame();
 
 protected:
+    uint64_t frames{};
+    std::string sprite_name;
     bool checkCollision(State &state) const override;
     static constexpr std::string_view ANIM_LEFT[3] = {"player_15", "player_14",
                                                       "player_16"};

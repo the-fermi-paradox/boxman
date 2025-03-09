@@ -1,4 +1,7 @@
 #include "Moveable.h"
+
+#include <__algorithm/ranges_any_of.h>
+
 #include "State.h"
 void Moveable::move(State &state)
 {
@@ -51,9 +54,7 @@ bool Moveable::checkCollision(const GameObject &B) const
 
 bool Moveable::checkCollision(State &state) const
 {
-    for (auto &object: state.statics) {
-        if (this->checkCollision(object))
-            return true;
-    }
-    return false;
+    return std::ranges::any_of(state.statics, [&](const auto &el) {
+        return this->checkCollision(el);
+    });
 }

@@ -33,6 +33,10 @@ add_executable(
         GameObjects/Moveable.h
         GameObjects/Target.cpp
         GameObjects/Target.h
+        Game.cpp
+        Game.h
+        Renderer.cpp
+        Renderer.h
 )
 target_link_libraries(boxman PRIVATE ${SDLFwk} PRIVATE ${SDLImg})
 
@@ -43,7 +47,7 @@ add_custom_command(TARGET boxman POST_BUILD
 )
 
 add_custom_command(TARGET boxman POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-        ${CMAKE_SOURCE_DIR}/level.json ${CMAKE_BINARY_DIR}/level.json
-        COMMENT "Copying level.json..."
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/levels ${CMAKE_BINARY_DIR}/levels
+        COMMENT "Copying levels..."
 )

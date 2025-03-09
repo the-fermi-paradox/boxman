@@ -4,16 +4,20 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 void SpriteSheet::RenderSprite(const int x, const int y,
-                               const std::string &name)
+                               const SDL_Rect &source) const
+{
+    const SDL_Rect dest = {x, y, source.w, source.h};
+    sheet_texture.Render(&source, &dest);
+}
+void SpriteSheet::RenderSprite(const int x, const int y,
+                               const std::string &name) const
 {
     if constexpr (ERROR_LOGGING) {
         if (!sprites.contains(name)) {
             ErrorOut("Sprite name not present in map");
         }
     }
-    const SDL_Rect source = sprites[name];
-    const SDL_Rect dest = {x, y, source.w, source.h};
-    sheet_texture.Render(&source, &dest);
+    RenderSprite(x, y, sprites.at(name));
 }
 
 SpriteSheet::SpriteSheet(SDL_Renderer *renderer,
@@ -36,4 +40,8 @@ int SpriteSheet::GetSpriteHeight(const std::string &name) const
 int SpriteSheet::GetSpriteWidth(const std::string &name) const
 {
     return sprites.at(name).w;
+}
+SDL_Rect SpriteSheet::GetSpriteFromName(const std::string &name) const
+{
+    return sprites.at(name);
 }

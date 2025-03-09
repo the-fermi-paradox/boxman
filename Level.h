@@ -5,22 +5,12 @@
 
 class Level {
 public:
-    Level(const std::filesystem::path &path, const SpriteSheet &ss);
+    Level(const std::filesystem::path &path, const SpriteSheet &sprite_sheet);
     explicit Level(const char *path, const SpriteSheet &ss);
-    bool checkWin();
-    void drawLevel(SpriteSheet &ss) const;
-    void reset();
-    Player &getPlayer();
-    State state;
-    bool win = false;
+    [[nodiscard]] State getState() const;
 
 private:
-    State start_state;
-    Player player;
-    int player_start_x;
-    int player_start_y;
-    int width;
-    int height;
+    State state;
 };
 
 #endif // BOXMAN_LEVEL_H

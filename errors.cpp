@@ -1,4 +1,5 @@
 #include "errors.h"
+#include <SDL2/SDL.h>
 void ErrorOut(const char *s, const int error_code)
 {
     if constexpr (ERROR_LOGGING)

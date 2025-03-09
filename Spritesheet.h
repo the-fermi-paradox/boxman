@@ -10,9 +10,11 @@ public:
     SpriteSheet(SDL_Renderer *renderer, const std::filesystem::path &img_path,
                 const std::filesystem::path &json_path);
     void Refresh();
-    void RenderSprite(int x, int y, const std::string &name);
-    [[nodiscard]] int GetSpriteWidth(const std::string &name) const;
+    void RenderSprite(int x, int y, const SDL_Rect &source) const;
+    void RenderSprite(int x, int y, const std::string &name) const;
     [[nodiscard]] int GetSpriteHeight(const std::string &name) const;
+    [[nodiscard]] int GetSpriteWidth(const std::string &name) const;
+    [[nodiscard]] SDL_Rect GetSpriteFromName(const std::string &name) const;
 
 private:
     std::unordered_map<std::string, SDL_Rect> sprites;

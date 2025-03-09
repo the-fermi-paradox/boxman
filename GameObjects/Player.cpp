@@ -1,28 +1,35 @@
 #include "Player.h"
 #include "State.h"
-void Player::setAnimation(const int i)
+
+void Player::setAnimation(const SpriteSheet &sprite_sheet)
 {
     if (!vx && !vy) {
-        if (sprite == ANIM_DOWN[0] || sprite == ANIM_DOWN[2]) {
-            sprite = ANIM_DOWN[1];
-        } else if (sprite == ANIM_LEFT[0] || sprite == ANIM_LEFT[2]) {
-            sprite = ANIM_LEFT[1];
-        } else if (sprite == ANIM_RIGHT[0] || sprite == ANIM_RIGHT[2]) {
-            sprite = ANIM_RIGHT[1];
-        } else if (sprite == ANIM_UP[0] || sprite == ANIM_UP[2]) {
-            sprite = ANIM_UP[1];
+        if (sprite_name == ANIM_DOWN[0] || sprite_name == ANIM_DOWN[2]) {
+            sprite_name = ANIM_DOWN[1];
+        } else if (sprite_name == ANIM_LEFT[0] || sprite_name == ANIM_LEFT[2]) {
+            sprite_name = ANIM_LEFT[1];
+        } else if (sprite_name == ANIM_RIGHT[0] ||
+                   sprite_name == ANIM_RIGHT[2]) {
+            sprite_name = ANIM_RIGHT[1];
+        } else if (sprite_name == ANIM_UP[0] || sprite_name == ANIM_UP[2]) {
+            sprite_name = ANIM_UP[1];
         }
     }
     if (vx > 0) {
-        sprite = ANIM_RIGHT[(i % 30) / 10];
+        sprite_name = ANIM_RIGHT[(frames % 30) / 10];
     } else if (vx < 0) {
-        sprite = ANIM_LEFT[(i % 30) / 10];
+        sprite_name = ANIM_LEFT[(frames % 30) / 10];
     } else if (vy < 0) {
-        sprite = ANIM_UP[(i % 30) / 10];
+        sprite_name = ANIM_UP[(frames % 30) / 10];
     } else if (vy > 0) {
-        sprite = ANIM_DOWN[(i % 30) / 10];
+        sprite_name = ANIM_DOWN[(frames % 30) / 10];
+    }
+
+    if (!sprite_name.empty()) {
+        sprite = sprite_sheet.GetSpriteFromName(sprite_name);
     }
 }
+void Player::nextFrame() { frames++; }
 
 void Player::handleEvent(const SDL_Event &e)
 {

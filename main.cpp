@@ -1,5 +1,7 @@
+#include "Game.h"
 #include "GameObjects/Player.h"
 #include "Level.h"
+#include "Renderer.h"
 #include "Spritesheet.h"
 #include "Window.h"
 #include "errors.h"
@@ -20,15 +22,15 @@ int main()
     SpriteSheet sprite_sheet(W.GetRenderer(),
                              "sokoban/Spritesheet/spritesheet.png",
                              "sokoban/Spritesheet/spritesheet.json");
-    Level level("level.json", sprite_sheet);
-    Player &player = level.getPlayer();
+    Game game(State(), sprite_sheet);
+    game.nextLevel();
     const auto WinScreen = Texture(W.GetRenderer(), "sokoban/good_ending.png");
+    Renderer renderer(sprite_sheet);
 
     /* Main game loop */
     bool game_running = true;
-    int frames = 0;
     SDL_Event e;
-    while (game_running) {
+    while (!game.getGameOver() && game_running) {
         while (SDL_PollEvent(&e)) {
             switch (e.type) {
                 case SDL_QUIT:
@@ -37,27 +39,31 @@ int main()
                 case SDL_KEYDOWN:
                     switch (e.key.keysym.sym) {
                         case SDLK_RETURN:
-                            level.reset();
+                            game.reset();
                             break;
                     }
                     break;
             }
-            player.handleEvent(e);
+            game.state.player.handleEvent(e);
         }
-        if (!level.win) {
-            player.move(level.state);
-            player.setAnimation(frames);
-            W.clear();
-            level.drawLevel(sprite_sheet);
-            if (level.checkWin()) {
-                WinScreen.Render(nullptr, nullptr);
-            }
-            W.present();
-        }
+        game.advanceState();
+        W.clear();
+        renderer.render(game.state);
+        W.present();
         const auto curr = SDL_GetTicks64();
         while (curr - SDL_GetTicks64() < 1000 / 60) {
         }
-        ++frames;
+    }
+    // Display the win screen
+    while (game_running) {
+        while (SDL_PollEvent(&e)) {
+            if (e.type == SDL_QUIT)
+                game_running = false;
+        }
+        WinScreen.Render(nullptr, nullptr);
+        const auto curr = SDL_GetTicks64();
+        while (curr - SDL_GetTicks64() < 1000 / 60) {
+        }
     }
 
     IMG_Quit();

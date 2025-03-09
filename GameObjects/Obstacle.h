@@ -5,8 +5,6 @@
 class Obstacle : public GameObject {
 public:
     using GameObject::GameObject;
-
-protected:
 };
 
 #endif // OBSTACLE_H
