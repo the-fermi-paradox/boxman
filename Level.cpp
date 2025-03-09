@@ -31,7 +31,7 @@ Level::Level(const std::filesystem::path &path, const SpriteSheet &sprite_sheet)
         for (int j = 0; j < level_data[i].size(); ++j) {
             std::string type = level_data[i][j]["type"];
             std::string sprite = level_data[i][j]["sprite"];
-            auto floor = GameObject(sprite_sheet.GetSpriteFromName(sprite),
+            auto floor = GameObject(sprite_sheet.GetSpriteFromName("ground_01"),
                                     j * TILE_WIDTH, i * TILE_HEIGHT);
             state.floors.push_back(floor);
             auto addEntity = [&]<typename T>(auto &container) -> void {

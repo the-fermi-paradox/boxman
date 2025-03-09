@@ -1,6 +1,5 @@
 #include "Game.h"
 #include "GameObjects/Player.h"
-#include "Level.h"
 #include "Renderer.h"
 #include "Spritesheet.h"
 #include "Window.h"
@@ -51,19 +50,21 @@ int main()
         renderer.render(game.state);
         W.present();
         const auto curr = SDL_GetTicks64();
-        while (curr - SDL_GetTicks64() < 1000 / 60) {
-        }
+        while (curr - SDL_GetTicks64() < 1000 / 60)
+            ;
     }
     // Display the win screen
     while (game_running) {
         while (SDL_PollEvent(&e)) {
-            if (e.type == SDL_QUIT)
+            if (e.type == SDL_QUIT || e.type == SDL_KEYDOWN)
                 game_running = false;
         }
+        W.clear();
         WinScreen.Render(nullptr, nullptr);
+        W.present();
         const auto curr = SDL_GetTicks64();
-        while (curr - SDL_GetTicks64() < 1000 / 60) {
-        }
+        while (curr - SDL_GetTicks64() < 1000 / 60)
+            ;
     }
 
     IMG_Quit();

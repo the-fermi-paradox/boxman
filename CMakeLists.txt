@@ -40,14 +40,34 @@ add_executable(
 )
 target_link_libraries(boxman PRIVATE ${SDLFwk} PRIVATE ${SDLImg})
 
-add_custom_command(TARGET boxman POST_BUILD
+# Function to collect all files in a directory (CMake 3.12+ required)
+function(collect_files DIR OUT_VAR)
+    file(GLOB_RECURSE FILES ${DIR}/*)
+    set(${OUT_VAR} ${FILES} PARENT_SCOPE)
+endfunction()
+
+# Collect all files inside sokoban and levels
+collect_files(${CMAKE_SOURCE_DIR}/sokoban SOKOBAN_FILES)
+collect_files(${CMAKE_SOURCE_DIR}/levels LEVEL_FILES)
+
+# Copy sokoban assets only if they change
+add_custom_command(
+        OUTPUT ${CMAKE_BINARY_DIR}/sokoban
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/sokoban ${CMAKE_BINARY_DIR}/sokoban
+        DEPENDS ${SOKOBAN_FILES}
         COMMENT "Copying sokoban assets..."
 )
 
-add_custom_command(TARGET boxman POST_BUILD
+# Copy level files only if they change
+add_custom_command(
+        OUTPUT ${CMAKE_BINARY_DIR}/levels
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/levels ${CMAKE_BINARY_DIR}/levels
-        COMMENT "Copying levels..."
+        DEPENDS ${LEVEL_FILES}
+        COMMENT "Copying level files..."
 )
+
+# Ensure that the asset copying is always checked before the executable builds
+add_custom_target(copy_assets DEPENDS ${CMAKE_BINARY_DIR}/sokoban ${CMAKE_BINARY_DIR}/levels)
+add_dependencies(boxman copy_assets)
