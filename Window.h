@@ -2,7 +2,7 @@
 #define BOXMAN_WINDOW_H
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
-#include "errors.h"
+#include "Errors.h"
 
 class Window {
 public:

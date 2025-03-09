@@ -1,4 +1,4 @@
-#include "errors.h"
+#include "Errors.h"
 #include <SDL2/SDL.h>
 void ErrorOut(const char *s, const int error_code)
 {

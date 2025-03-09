@@ -3,7 +3,7 @@
 #include <__algorithm/ranges_any_of.h>
 #include <filesystem>
 
-#include "errors.h"
+#include "Errors.h"
 
 constexpr int TILE_HEIGHT = 64;
 constexpr int TILE_WIDTH = 64;

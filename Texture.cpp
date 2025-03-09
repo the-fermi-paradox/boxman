@@ -1,7 +1,7 @@
 #include "Texture.h"
 #include <SDL2_image/SDL_image.h>
 #include <filesystem>
-#include "errors.h"
+#include "Errors.h"
 
 Texture::Texture() : renderer(nullptr) {}
 Texture::Texture(SDL_Renderer *renderer, std::filesystem::path path) :
