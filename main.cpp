@@ -1,9 +1,9 @@
+#include "Errors.h"
 #include "Game.h"
 #include "GameObjects/Player.h"
 #include "Renderer.h"
 #include "Spritesheet.h"
 #include "Window.h"
-#include "errors.h"
 constexpr int TILE_WIDTH = 64;
 constexpr int TILE_HEIGHT = 64;
 

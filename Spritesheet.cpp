@@ -1,5 +1,5 @@
 #include "Spritesheet.h"
-#include <errors.h>
+#include <Errors.h>
 #include <fstream>
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
