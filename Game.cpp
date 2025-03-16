@@ -40,6 +40,11 @@ void Game::nextLevel()
         return;
     this->reset();
 }
+void Game::gotoLevel(const int level)
+{
+    current_level = level;
+    this->reset();
+}
 void Game::reset()
 {
     const auto level = this->getCurrentLevel();

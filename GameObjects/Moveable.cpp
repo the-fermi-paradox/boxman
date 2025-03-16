@@ -1,17 +1,15 @@
 #include "Moveable.h"
-
-#include <__algorithm/ranges_any_of.h>
-
+#include <algorithm>
 #include "State.h"
 void Moveable::move(State &state)
 {
     collider.x += vx;
-    if (collider.x < 0 || (collider.x >= level_width) ||
+    if (collider.x < 0 || collider.x >= level_width ||
         this->checkCollision(state)) {
         collider.x -= vx;
     }
     collider.y += vy;
-    if (collider.y < 0 || (collider.y >= level_height) ||
+    if (collider.y < 0 || collider.y >= level_height ||
         this->checkCollision(state)) {
         collider.y -= vy;
     }

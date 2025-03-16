@@ -10,6 +10,7 @@ public:
     [[nodiscard]] bool getGameOver() const;
     void advanceState();
     void nextLevel();
+    void gotoLevel(int level);
     void reset();
     bool checkBeatLevel();
     State state;

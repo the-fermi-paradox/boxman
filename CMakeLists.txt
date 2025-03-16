@@ -1,8 +1,25 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.9.2)
 project(boxman)
-
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined")
+add_custom_target(copy_levels ALL
+        COMMAND ${CMAKE_COMMAND} -E echo "Copying level files..."
+        COMMAND ${CMAKE_COMMAND} -E rm -rf ${CMAKE_BINARY_DIR}/levels
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/levels ${CMAKE_BINARY_DIR}/levels
+)
+add_custom_target(copy_assets ALL
+        COMMAND ${CMAKE_COMMAND} -E echo "Copying asset files..."
+        COMMAND ${CMAKE_COMMAND} -E rm -rf ${CMAKE_BINARY_DIR}/sokoban
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/sokoban ${CMAKE_BINARY_DIR}/sokoban
+)
+add_custom_target(copy_music ALL
+        COMMAND ${CMAKE_COMMAND} -E echo "Copying music files..."
+        COMMAND ${CMAKE_COMMAND} -E rm -rf ${CMAKE_BINARY_DIR}/music
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/music ${CMAKE_BINARY_DIR}/music
+)
 
 find_library(SDLFwk SDL2 REQUIRED)
 find_library(SDLImg SDL2_image)
@@ -39,36 +56,7 @@ add_executable(
         Renderer.cpp
         Renderer.h
 )
-target_link_libraries(boxman PRIVATE ${SDLFwk} PRIVATE ${SDLImg} PRIVATE ${SDLMixer})
+add_subdirectory(${CMAKE_SOURCE_DIR}/lib/cargs)
+add_dependencies(boxman copy_levels copy_assets copy_music)
+target_link_libraries(boxman PRIVATE cargs PRIVATE ${SDLFwk} PRIVATE ${SDLImg} PRIVATE ${SDLMixer})
 
-# Function to collect all files in a directory (CMake 3.12+ required)
-function(collect_files DIR OUT_VAR)
-    file(GLOB_RECURSE FILES ${DIR}/*)
-    set(${OUT_VAR} ${FILES} PARENT_SCOPE)
-endfunction()
-
-# Collect all files inside sokoban and levels
-collect_files(${CMAKE_SOURCE_DIR}/sokoban SOKOBAN_FILES)
-collect_files(${CMAKE_SOURCE_DIR}/levels LEVEL_FILES)
-
-# Copy sokoban assets only if they change
-add_custom_command(
-        OUTPUT ${CMAKE_BINARY_DIR}/sokoban
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/sokoban ${CMAKE_BINARY_DIR}/sokoban
-        DEPENDS ${SOKOBAN_FILES}
-        COMMENT "Copying sokoban assets..."
-)
-
-# Copy level files only if they change
-add_custom_command(
-        OUTPUT ${CMAKE_BINARY_DIR}/levels
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/levels ${CMAKE_BINARY_DIR}/levels
-        DEPENDS ${LEVEL_FILES}
-        COMMENT "Copying level files..."
-)
-
-# Ensure that the asset copying is always checked before the executable builds
-add_custom_target(copy_assets DEPENDS ${CMAKE_BINARY_DIR}/sokoban ${CMAKE_BINARY_DIR}/levels)
-add_dependencies(boxman copy_assets)

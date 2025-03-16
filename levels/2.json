@@ -27,12 +27,12 @@
     [
       {"sprite": "block_03", "type": "block"},
       {"sprite": "ground_01", "type": "floor"},
-      {"sprite": "crate_01", "type": "crate"},
+      {"sprite": "crate_06", "type": "crate"},
       {"sprite": "ground_01", "type": "floor"},
       {"sprite": "ground_01", "type": "floor"},
       {"sprite": "ground_01", "type": "floor"},
       {"sprite": "ground_01", "type": "floor"},
-      {"sprite": "crate_01", "type": "crate"},
+      {"sprite": "crate_06", "type": "crate"},
       {"sprite": "ground_01", "type": "floor"},
       {"sprite": "block_03", "type": "block"}
     ],

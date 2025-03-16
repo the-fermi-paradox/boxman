@@ -8,7 +8,7 @@ public:
     virtual ~GameObject() = default;
     GameObject() = default;
     GameObject(SDL_Rect sprite, int x, int y);
-    bool samePosition(const GameObject &o) const;
+    [[nodiscard]] bool samePosition(const GameObject &o) const;
     [[nodiscard]] int getX() const;
     [[nodiscard]] int getY() const;
     [[nodiscard]] int getTop() const;
@@ -21,7 +21,7 @@ public:
     static constexpr int speed = 2;
 
 protected:
-    SDL_Rect sprite;
+    SDL_Rect sprite{};
     SDL_Rect collider{};
 };
 

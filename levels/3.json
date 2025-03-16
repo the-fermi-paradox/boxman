@@ -1,0 +1,98 @@
+{
+  "map": [
+    [
+      {"sprite": "ground_04", "type": "ground"},
+      {"sprite": "ground_04", "type": "ground"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "ground_04", "type": "ground"}
+    ],
+    [
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "ground_04", "type": "floor"}
+    ],
+    [
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "environment_03", "type": "target"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "crate_02", "type": "crate"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "ground_04", "type": "floor"}
+    ],
+    [
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "crate_02", "type": "crate"},
+      {"sprite": "environment_03", "type": "target"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "ground_04", "type": "floor"}
+    ],
+    [
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "environment_03", "type": "target"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "crate_02", "type": "crate"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "ground_04", "type": "floor"}
+    ],
+    [
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "environment_03", "type": "target"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"}
+    ],
+    [
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "crate_02", "type": "crate"},
+      {"sprite": "environment_03", "type": "target"},
+      {"sprite": "crate_02", "type": "crate"},
+      {"sprite": "crate_02", "type": "crate"},
+      {"sprite": "crate_02", "type": "crate"},
+      {"sprite": "environment_03", "type": "target"},
+      {"sprite": "block_02", "type": "block"}
+    ],
+    [
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "environment_03", "type": "target"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "ground_04", "type": "floor"},
+      {"sprite": "block_02", "type": "block"}
+    ],
+    [
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"},
+      {"sprite": "block_02", "type": "block"}
+    ]
+  ],
+  "player_start": {
+    "x": 2,
+    "y": 2
+  }
+}

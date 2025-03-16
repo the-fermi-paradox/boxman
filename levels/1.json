@@ -25,7 +25,7 @@
     [
       {"sprite": "block_03", "type": "block"},
       {"sprite": "ground_01", "type": "floor"},
-      {"sprite": "crate_01", "type": "crate"},
+      {"sprite": "crate_06", "type": "crate"},
       {"sprite": "block_03", "type": "block"},
       {"sprite": "ground_01", "type": "floor"},
       {"sprite": "ground_01", "type": "floor"},
@@ -39,7 +39,7 @@
       {"sprite": "ground_01", "type": "floor"},
       {"sprite": "ground_01", "type": "floor"},
       {"sprite": "ground_01", "type": "floor"},
-      {"sprite": "environment_01", "type": "target"},
+      {"sprite": "environment_03", "type": "target"},
       {"sprite": "block_03", "type": "block"},
       {"sprite": "block_03", "type": "block"},
       {"sprite": "block_03", "type": "block"},

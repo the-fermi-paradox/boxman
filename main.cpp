@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2_mixer/SDL_mixer.h>
-#include <__filesystem/operations.h>
-
+#include <cargs.h>
+#include <filesystem>
 #include "Errors.h"
 #include "Game.h"
 #include "GameObjects/Player.h"
@@ -11,8 +11,40 @@
 constexpr int TILE_WIDTH = 64;
 constexpr int TILE_HEIGHT = 64;
 
-int main()
+static cag_option options[] = {{.identifier = 'l',
+                                .access_letters = "l",
+                                .access_name = "key",
+                                .value_name = "VALUE",
+                                .description = "Specify a level to start from"},
+
+                               {.identifier = 'h',
+                                .access_letters = "h",
+                                .access_name = "help",
+                                .description = "Shows the command help"}};
+
+int main(int argc, char **argv)
 {
+    std::string value;
+    cag_option_context context;
+    cag_option_init(&context, options, std::size(options), argc, argv);
+    while (cag_option_fetch(&context)) {
+        switch (cag_option_get_identifier(&context)) {
+            case 'l':
+                value = cag_option_get_value(&context);
+                break;
+            case 'h':
+                printf("Usage: cargsdemo [OPTION]...\n");
+                printf("Demonstrates the cargs library.\n\n");
+                cag_option_print(options, std::size(options), stdout);
+                printf("\nNote that all formatting is done by cargs.\n");
+                return EXIT_SUCCESS;
+            case '?':
+            default:
+                cag_option_print_error(&context, stdout);
+                break;
+        }
+    }
+    int level = !value.empty() ? std::stoi(value) : 1;
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         ErrorOut("Failed to initialize video subsystem");
     }
@@ -29,9 +61,8 @@ int main()
         return -1;
     }
 
-    // Load and play a sample MP3 file (example)
     Mix_Music *music =
-            Mix_LoadMUS(std::filesystem::absolute("puzzle.mp3").c_str());
+            Mix_LoadMUS(std::filesystem::absolute("music/puzzle.mp3").c_str());
     if (!music) {
         ErrorOut("Failed to load music!");
     } else {
@@ -43,11 +74,10 @@ int main()
                              "sokoban/Spritesheet/spritesheet.png",
                              "sokoban/Spritesheet/spritesheet.json");
     Game game(State(), sprite_sheet);
-    game.nextLevel();
+    game.gotoLevel(level);
     const auto WinScreen = Texture(W.GetRenderer(), "sokoban/good_ending.png");
     Renderer renderer(sprite_sheet);
 
-    /* Main game loop */
     bool game_running = true;
     SDL_Event e;
     while (!game.getGameOver() && game_running) {
