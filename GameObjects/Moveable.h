@@ -11,10 +11,12 @@ public:
     void setSpeed(int x, int y);
 
 protected:
+    int collision_margin{30};
     int vx{};
     int vy{};
-    [[nodiscard]] bool checkCollision(const GameObject &B) const;
+    [[nodiscard]] virtual bool checkCollision(const GameObject &B) const;
     virtual bool checkCollision(State &state);
+    [[nodiscard]] virtual int getCollisionMargin() const;
 };
 
 #endif // MOVEABLE_H

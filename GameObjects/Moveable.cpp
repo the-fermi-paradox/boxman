@@ -36,7 +36,7 @@ bool Moveable::checkCollision(const GameObject &B) const
 
     /* The -30 here is to handle the isometric perspective
      * and make things feel more natural. */
-    if (A.getTop() >= B.getBottom() - 30) {
+    if (A.getTop() >= B.getBottom() - this->getCollisionMargin()) {
         return false;
     }
 
@@ -56,3 +56,4 @@ bool Moveable::checkCollision(State &state)
         return this->checkCollision(el);
     });
 }
+int Moveable::getCollisionMargin() const { return collision_margin; }

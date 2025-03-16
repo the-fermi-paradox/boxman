@@ -16,3 +16,8 @@ bool Crate::checkCollision(State &state)
     }
     return Moveable::checkCollision(state);
 }
+int Crate::getCollisionMargin() const
+{
+    printf("I was called!\n");
+    return collision_margin;
+}

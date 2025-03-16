@@ -8,6 +8,10 @@ public:
     using Moveable::Moveable, Moveable::checkCollision;
     bool checkCollision(State &state) override;
     bool locked{};
+
+protected:
+    int collision_margin{0};
+    [[nodiscard]] int getCollisionMargin() const override;
 };
 
 #endif // CRATE_H
